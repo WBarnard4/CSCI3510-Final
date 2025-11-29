@@ -1,9 +1,13 @@
+using System;
+using Unity.Mathematics;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.TextCore.Text;
 
 public class Player : MonoBehaviour
 {
+
+    public float health = 100;
     public float baseSpeed;
     public float runningAmplifier;
 
@@ -139,6 +143,18 @@ public class Player : MonoBehaviour
             rotation.z = 0;
 
             transform.eulerAngles = rotation;
+        }
+    }
+
+    public void takeDamage(float damage)
+    {
+        //force damage upon the player
+        health -= damage;
+        Debug.Log(health);
+        if (health <= 0)
+        {
+            //kill the player and end the game.
+            Debug.Log("Player is Dead!");
         }
     }
 }
