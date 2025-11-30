@@ -1,6 +1,10 @@
 using UnityEngine;
 using UnityEngine.AI;
 
+//TODO:
+// NEED TO MAKE THE TWO OTHER ZOMBIES WORK LIKE THE WEAK ONE, CHANGE THEIR ANIMATION SHEETS TO FOLLOW THE STYLE
+// ADD A RANGED ZOMBIE (POTENTIALLY MIGHT BE TOO TOUGH)
+// CREATE A DEATH FUNCTION TO DESTROY THE ENEMY ONCE KILLED
 public class EnemyController : MonoBehaviour
 {
     public float lookRadius = 8f;
@@ -8,7 +12,8 @@ public class EnemyController : MonoBehaviour
     public float health = 10;
     public float damageAmount = 0;
     public float EXPAmount = 0;
-    public float attackSpeed = 1;    
+    public float attackSpeed = 1;
+    public AnimationClip attackClip;
 
 
     private Player playerObj;
@@ -19,6 +24,9 @@ public class EnemyController : MonoBehaviour
     AudioSource groan;
     Animator animator;
 
+
+
+
     void Awake()
     {
         //utilize awake here for safer initilization of these components as enemies are spawned
@@ -26,7 +34,7 @@ public class EnemyController : MonoBehaviour
         groan = GetComponent<AudioSource>();
         animator = GetComponent<Animator>();
 
-        
+
 
     }
 
@@ -37,51 +45,43 @@ public class EnemyController : MonoBehaviour
         playerObj = target.GetComponent<Player>();
 
 
+        //we need to match the animation speed to the given attack speed
+        float animSpeedMultiplier = attackClip.length / attackSpeed;
+        animator.SetFloat("AttackSpeed", animSpeedMultiplier);
+
+
     }
 
 
     void Update()
     {
+
+
+
+
+
         float distance = Vector3.Distance(target.position, transform.position); //Distance between the zombie and the target
-
-        // Code is being commented in case a search radius is a better way of implementing
-        // if (distance <= lookRadius) //if the player enters the look radius
-        // {
-        //     agent.SetDestination(target.position); //set zombie destination to the player
-        //     PlaySound();
-
-        //     animator.SetFloat("Forward", 1.0f); //set our animation state to 1
-        // }
-        // else
-        // {
-        //     agent.SetDestination(transform.position); //set zombie destination to its current position
-        //     groan.Stop();
-        //     animator.SetFloat("Forward", 0.0f); //set animation state to 0
-        // }
-
-        //zombies should always be moving towards the player
-        agent.SetDestination(target.position); //set zombie destination to the player
-        // PlaySound(); //we do not need this to play every 5 seconds right now lmao
-        animator.SetFloat("Forward", 1.0f); //set our animation state to 1
+        timeSinceAttack -= Time.deltaTime;
 
         if (distance <= agent.stoppingDistance)
         {
             //Stopping distance is different for each enemy
             //for rangers, we will need to check the tag, and initiate their ranged attacks
             //Idea is to call an attack method, that then communicates to a function within the player script to take damage
-            timeSinceAttack -= Time.deltaTime;
-            if (timeSinceAttack <= 0)
-            {
 
-                animator.SetFloat("Forward", 0.0f); //make the zombie stop when running into a player 
-                attackPlayer();                     //call our attack function here
-
-                timeSinceAttack += attackSpeed;
-                Debug.Log("Zombie Attacked");
-            }
+            attackPlayer();
             FaceTarget();
 
         }
+        else
+        {
+            //if we are not attacking, we should be moving towards the player with our walking anim
+
+            agent.SetDestination(target.position); //set zombie destination to the player
+
+        }
+
+
     }
 
     void PlaySound()
@@ -107,6 +107,21 @@ public class EnemyController : MonoBehaviour
 
     void attackPlayer()
     {
-        playerObj.takeDamage(damageAmount);
+
+        if (timeSinceAttack <= 0)
+        {
+
+
+            animator.SetTrigger("Attack");
+            agent.SetDestination(transform.position);
+
+            playerObj.takeDamage(damageAmount);
+            Debug.Log("sent damage");
+
+            timeSinceAttack = attackSpeed;
+
+        }
+
+
     }
 }
