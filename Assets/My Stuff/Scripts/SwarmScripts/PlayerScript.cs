@@ -8,6 +8,8 @@ public class PlayerScript : MonoBehaviour
     private float experience = 0.0f;
     private bool isAlive = true;
 
+    public DamageFlashEffect damageFlash; // Reference to the DamageFlashEffect script
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -20,7 +22,7 @@ public class PlayerScript : MonoBehaviour
         
     }
 
-    void takeDamage(float damage)
+    public void takeDamage(float damage)
     {
         if (!isAlive) return;
 
@@ -31,10 +33,15 @@ public class PlayerScript : MonoBehaviour
             isAlive = false;
             Debug.Log("Player has died.");
         }
+        Debug.Log("Player took " + damage + " damage. Current health: " + health);
+        if (damageFlash != null)
+        {
+            damageFlash.TriggerFlash();
+        }
     }
 
 
-    void gainExperience(float exp)
+    public void gainExperience(float exp)
     {
         if (!isAlive) return;
 
@@ -42,7 +49,7 @@ public class PlayerScript : MonoBehaviour
         Debug.Log("Gained " + exp + " experience. Total experience: " + experience);
     }
 
-    void heal(float amount)
+    public void heal(float amount)
     {
         if (!isAlive) return;
 
@@ -54,7 +61,7 @@ public class PlayerScript : MonoBehaviour
         Debug.Log("Healed " + amount + " health. Current health: " + health);
     }
 
-    bool getAlive()
+    public bool getAlive()
     {
         return isAlive;
     }

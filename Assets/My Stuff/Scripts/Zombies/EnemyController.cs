@@ -16,7 +16,7 @@ public class EnemyController : MonoBehaviour
     public AnimationClip attackClip;
 
 
-    private Player playerObj;
+    private PlayerScript playerObj;
     private float timeSinceAttack = 0f;
 
     Transform target;
@@ -42,8 +42,8 @@ public class EnemyController : MonoBehaviour
     void Start()
     {
         target = PlayerManager.Instance.player.transform;
-        playerObj = target.GetComponent<Player>();
-
+        playerObj = target.GetComponent<PlayerScript>();
+        Debug.Log("Enemy target acquired" + playerObj.name);
 
         //we need to match the animation speed to the given attack speed
         float animSpeedMultiplier = attackClip.length / attackSpeed;
