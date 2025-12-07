@@ -54,7 +54,7 @@ public class ZombieGun : MonoBehaviour
                     }
                 }
             }
-            nextTimeToFire = Time.time + 0.3f;
+            nextTimeToFire = Time.time + 0.1f;
         }
     }
 }
