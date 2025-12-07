@@ -267,14 +267,14 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 1481417426184300, guid: 0460a539b95c36d43a61b9c176cdca57, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 4897229121420103234}
+      addedObject: {fileID: 1343756474989159208}
   m_SourcePrefab: {fileID: 100100000, guid: 0460a539b95c36d43a61b9c176cdca57, type: 3}
 --- !u!1 &2342910409011306226 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1481417426184300, guid: 0460a539b95c36d43a61b9c176cdca57, type: 3}
   m_PrefabInstance: {fileID: 2343828721424447134}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &4897229121420103234
+--- !u!114 &1343756474989159208
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -283,11 +283,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2342910409011306226}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9ddf80bba208e14fb65fceeda916793, type: 3}
+  m_Script: {fileID: 11500000, guid: 1d322f0f1895dc542942aba1bd327cc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   range: 100
-  muzzleFlash: {fileID: 1438857963781712325}
+  muzzleFlash: {fileID: 0}
 --- !u!4 &2348454598146686606 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4944291180234768, guid: 0460a539b95c36d43a61b9c176cdca57, type: 3}
@@ -402,11 +402,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6fde415f805bb9641a23572b4ceba058, type: 3}
---- !u!198 &1438857963781712325 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 2987932858936940637, guid: 6fde415f805bb9641a23572b4ceba058, type: 3}
-  m_PrefabInstance: {fileID: 4215541511230861720}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3029293922609504910 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1191952443931857686, guid: 6fde415f805bb9641a23572b4ceba058, type: 3}
@@ -650,3 +645,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   experience: 0
+  damageFlash: {fileID: 0}
