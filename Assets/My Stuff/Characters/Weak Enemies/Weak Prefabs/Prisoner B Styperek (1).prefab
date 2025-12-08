@@ -518,7 +518,7 @@ MonoBehaviour:
   lookRadius: 8
   health: 50
   damageAmount: 10
-  EXPAmount: 15
+  EXPAmount: 25
   attackSpeed: 1
   attackClip: {fileID: 7400000, guid: 256d95dabeafeb64fb17278b5d677bcd, type: 2}
 --- !u!195 &4272100204702926722

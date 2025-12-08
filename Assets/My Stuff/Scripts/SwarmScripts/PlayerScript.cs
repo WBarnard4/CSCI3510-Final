@@ -1,12 +1,17 @@
+using System.ComponentModel;
 using UnityEngine;
 
 public class PlayerScript : MonoBehaviour
 {
-    [SerializeField]
-    private float health = 100.0f;
-    [SerializeField]
-    private float experience = 0.0f;
+    //[SerializeField] //commented for now, need public access to health and exp 
+    public float health = 100.0f;
+    //[SerializeField]
+    public float experience = 0.0f;
     private bool isAlive = true;
+
+    [HideInInspector]
+    public float LvlThreshold = 250.0f;
+    public int playerLevel = 0;
 
     public DamageFlashEffect damageFlash; // Reference to the DamageFlashEffect script
 
@@ -47,6 +52,10 @@ public class PlayerScript : MonoBehaviour
 
         experience += exp;
         Debug.Log("Gained " + exp + " experience. Total experience: " + experience);
+        if(experience >= LvlThreshold)
+        {
+            LevelUp();
+        }
     }
 
     public void heal(float amount)
@@ -65,4 +74,13 @@ public class PlayerScript : MonoBehaviour
     {
         return isAlive;
     }
+
+    public void LevelUp()
+    {
+        experience = 0;
+        LvlThreshold += 200;
+        playerLevel += 1;
+    }
+
+    
 }
