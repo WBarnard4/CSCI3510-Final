@@ -1,2 +1,2 @@
-# CSCI3510-Shooting Gallery
-Shooting Gallery group project.
+# CSCI3510-Swarm
+Swarm group project.
