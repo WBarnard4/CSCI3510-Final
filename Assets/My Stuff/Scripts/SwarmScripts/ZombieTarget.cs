@@ -29,7 +29,7 @@ public class ZombieTarget : MonoBehaviour
 
     private bool isRising = true;
     public float riseSpeed = 2.0f;
-    private float groundYLevel = 0.0f;
+    private float groundYLevel;
     private NavMeshAgent navAgent;
 
     public GameObject dirtParticlePrefab; 
@@ -44,6 +44,8 @@ public class ZombieTarget : MonoBehaviour
     public float maxStartDelay = 2.0f;
     private float startWaitTimer = 0.0f;
     private bool isWaitingToWalk = false;
+
+    private float deathYLevel;
 
 
     private void Awake()
@@ -72,7 +74,26 @@ public class ZombieTarget : MonoBehaviour
 
         audioSource.spatialBlend = 1.0f;
         audioSource.maxDistance = 20.0f;
+
+        CalculateGroundLevel();
     }
+
+    void CalculateGroundLevel()
+{
+    RaycastHit hit;
+    Vector3 origin = transform.position + Vector3.up * 50f;
+
+    if (Physics.Raycast(origin, Vector3.down, out hit, 100f))
+    {
+        groundYLevel = hit.point.y;
+    }
+    else
+    {
+        groundYLevel = 0f; // Default to 0 if no ground found
+        Debug.LogWarning("Ground level not found for " + gameObject.name + ". Defaulting to Y=0.");
+    }
+}
+    
 
     private void Start()
     {
@@ -137,7 +158,7 @@ public class ZombieTarget : MonoBehaviour
         }
         if (enemyController.health <= 0)
         {
-            if(transform.position.y > -3.0f)
+            if(transform.position.y > deathYLevel - 3.0f)   
             {
                 transform.position = new Vector3(transform.position.x, transform.position.y - Time.deltaTime, transform.position.z);
             } else
@@ -190,6 +211,7 @@ void PlayFootstep()
             {
                 Debug.Log("Zombie has died.");
                 dead = true;
+                deathYLevel = transform.position.y;
                 Rigidbody rb = gameObject.AddComponent<Rigidbody>();
                 rb.isKinematic = true;
                 NavMeshAgent agent = GetComponent<NavMeshAgent>();
