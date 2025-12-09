@@ -7,6 +7,7 @@ public class PlayerScript : MonoBehaviour
     public float health = 100.0f;
     //[SerializeField]
     public float experience = 0.0f;
+    public PlayerHudScript hud;
     private bool isAlive = true;
 
     [HideInInspector]
@@ -43,6 +44,7 @@ public class PlayerScript : MonoBehaviour
         {
             damageFlash.TriggerFlash();
         }
+        hud.UpdateHud();
     }
 
 
@@ -56,6 +58,7 @@ public class PlayerScript : MonoBehaviour
         {
             LevelUp();
         }
+        hud.UpdateHud();
     }
 
     public void heal(float amount)
@@ -68,6 +71,7 @@ public class PlayerScript : MonoBehaviour
             health = 100.0f;
         }
         Debug.Log("Healed " + amount + " health. Current health: " + health);
+        hud.UpdateHud();
     }
 
     public bool getAlive()

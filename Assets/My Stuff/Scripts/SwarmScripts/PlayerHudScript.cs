@@ -1,5 +1,6 @@
 using System.ComponentModel;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,25 +20,19 @@ public class PlayerHudScript : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+
     }
 
     void Awake()
     {
-        PlayerScript playerInfo = player.GetComponent<PlayerScript>();
-        float healthAmt = playerInfo.health;
-        int playerLevel = playerInfo.playerLevel;
-        float expAmount = playerInfo.experience;
-        float expThresh = playerInfo.LvlThreshold;
-        //anything that needs to be reset on scene entry
-        healthText.text = healthPrefix + healthAmt;
-        expText.text = expPrefix + expAmount + "/" + expThresh;
-        levelText.text = levelPrefix + playerLevel;
+        UpdateHud();
     }
-
-    // Update is called once per frame
-    void UpdateHud()
+    public void UpdateHud()
     {
         //Call this function whenever the player either gets hit or gains experience
+        PlayerScript p = player.GetComponent<PlayerScript>();
+        healthText.text = healthPrefix + p.health;
+        expText.text = expPrefix + p.experience + "/" + p.LvlThreshold;
+        levelText.text = levelPrefix + p.playerLevel;
     }
 }

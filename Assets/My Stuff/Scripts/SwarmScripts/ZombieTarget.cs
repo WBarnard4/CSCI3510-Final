@@ -15,6 +15,8 @@ public class ZombieTarget : MonoBehaviour
     public float EXPAmount = 10.0f;
     [SerializeField]
     private TMP_Text textDisplay;
+    [HideInInspector]
+    public bool giveXP = true;
 
     private EnemyController enemyController;
 

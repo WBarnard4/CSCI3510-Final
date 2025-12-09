@@ -4,6 +4,8 @@ using UnityEngine.InputSystem;
 
 public class ZombieGun : MonoBehaviour
 {
+    //TODO:
+    //add sound, and slight recoil to add some oomph when firing
     public float range = 100f;
 
     public ParticleSystem muzzleFlash;
@@ -19,7 +21,7 @@ public class ZombieGun : MonoBehaviour
     void Update()
     {
         bool ready = Time.time >= nextTimeToFire;
-        if ( ready && Input.GetButtonDown("Fire1"))
+        if ( ready && Input.GetButton("Fire1"))
         {
             Shoot();
         }
@@ -41,12 +43,13 @@ public class ZombieGun : MonoBehaviour
             if (target != null)
             {
                 target.Process(hit);
-                if(target.dead)
+                if(target.dead && target.giveXP)
                 {
                     //gain experience for killing zombie
                     PlayerScript player = GameObject.Find("PlayerCapsule").GetComponent<PlayerScript>();
                     if (player != null){
                         player.gainExperience(target.EXPAmount);
+                        target.giveXP = false;
                     }
                     else
                     {
