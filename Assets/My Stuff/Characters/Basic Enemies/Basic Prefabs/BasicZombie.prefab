@@ -1692,6 +1692,12 @@ MonoBehaviour:
   textDisplay: {fileID: 3233119487595208537}
   giveXP: 1
   dead: 0
+  riseSpeed: 2
+  dirtParticlePrefab: {fileID: 1839069868831513199, guid: 92353ac5e78ec5e4c92fd47a24fcf948, type: 3}
+  footstepSounds:
+  - {fileID: 8300000, guid: 26fc0865108da9b4187b14f473b85c91, type: 3}
+  - {fileID: 8300000, guid: 6bd9ec2a22bb9264ca391b6632439730, type: 3}
+  stepRate: 2
 --- !u!136 &2864726380516199214
 CapsuleCollider:
   m_ObjectHideFlags: 0

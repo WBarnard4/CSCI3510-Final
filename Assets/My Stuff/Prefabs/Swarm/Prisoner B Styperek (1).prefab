@@ -833,13 +833,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26fccdd72d7191741b1e804a0a7632bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageModifer: 0
   target: {fileID: 0}
+  player: {fileID: 0}
   effectsManager: {fileID: 0}
   hitEffect: {fileID: 0}
   effectDuration: 0.1
   hitSound: {fileID: 0}
+  EXPAmount: 10
   textDisplay: {fileID: 8022182930857209850}
+  giveXP: 1
   dead: 0
+  riseSpeed: 2
+  dirtParticlePrefab: {fileID: 1839069868831513199, guid: 92353ac5e78ec5e4c92fd47a24fcf948, type: 3}
 --- !u!136 &3272596328285853719
 CapsuleCollider:
   m_ObjectHideFlags: 0

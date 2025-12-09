@@ -26,6 +26,8 @@ public class PlayerScript : MonoBehaviour
     void Start()
     {
         health = maxHealth;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     // Update is called once per frame

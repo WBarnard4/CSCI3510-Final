@@ -27,10 +27,50 @@ public class ZombieTarget : MonoBehaviour
 
     public bool dead = false;
 
+    private bool isRising = true;
+    public float riseSpeed = 2.0f;
+    private float groundYLevel = 0.0f;
+    private NavMeshAgent navAgent;
+
+    public GameObject dirtParticlePrefab; 
+    private GameObject activeDirtParticles;
+
+    public AudioClip[] footstepSounds;
+    public float stepRate = 0.5f;
+    private float stepTimer;
+    private AudioSource audioSource;
+
+    public float minStartDelay = 0.5f;
+    public float maxStartDelay = 2.0f;
+    private float startWaitTimer = 0.0f;
+    private bool isWaitingToWalk = false;
+
     private void Awake()
     {
         //effectScript = effectsManager.GetComponent<Effect>();
         enemyController = GetComponent<EnemyController>(); 
+
+        navAgent = GetComponent<NavMeshAgent>();
+
+        if (dirtParticlePrefab != null)
+        {
+            activeDirtParticles = Instantiate(dirtParticlePrefab, transform.position, Quaternion.identity);
+            activeDirtParticles.transform.SetParent(transform);
+
+        }
+        
+
+        if (enemyController != null) enemyController.enabled = false;
+        if (navAgent != null) navAgent.enabled = false;
+
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
+
+        audioSource.spatialBlend = 1.0f;
+        audioSource.maxDistance = 20.0f;
     }
 
     private void Start()
@@ -43,7 +83,46 @@ public class ZombieTarget : MonoBehaviour
 
     private void Update()
     {
-        
+        if (isRising)
+        {
+            transform.position += Vector3.up * riseSpeed * Time.deltaTime;
+
+            if (transform.position.y >= groundYLevel)
+            {
+                transform.position = new Vector3(transform.position.x, groundYLevel, transform.position.z);
+                isRising = false;
+
+                if (activeDirtParticles != null)
+                {
+                    Destroy(activeDirtParticles); 
+                }
+
+                startWaitTimer = UnityEngine.Random.Range(minStartDelay, maxStartDelay);
+                Debug.Log("Start Wait Timer set to: " + startWaitTimer);
+                isWaitingToWalk = true;
+            }
+            return;
+        }
+        if (isWaitingToWalk)
+        {
+            startWaitTimer -= Time.deltaTime;
+            if (startWaitTimer <= 0)
+            {
+                isWaitingToWalk = false;
+                if (navAgent != null) navAgent.enabled = true;
+                if (enemyController != null) enemyController.enabled = true;
+            }
+            return;
+        }
+        if (navAgent != null && navAgent.enabled && navAgent.velocity.sqrMagnitude > 0.1f)
+        {
+            stepTimer -= Time.deltaTime;
+            if (stepTimer <= 0)
+            {
+                PlayFootstep();
+                stepTimer = stepRate;
+            }
+        }
         if (textDisplay.text != "")
         {
             if (timer < 0.5f)
@@ -67,6 +146,28 @@ public class ZombieTarget : MonoBehaviour
             }
         }
         
+    }
+
+void PlayFootstep()
+    {
+        // DEBUG LOGGING START
+        if (footstepSounds == null) {
+            Debug.LogError(gameObject.name + ": footstepSounds array is NULL!");
+        } else if (footstepSounds.Length == 0) {
+            Debug.LogError(gameObject.name + ": footstepSounds array is EMPTY (Size 0)!");
+        }
+        
+        if (audioSource == null) {
+            Debug.LogError(gameObject.name + ": AudioSource is NULL! Awake() might not have run.");
+        }
+        // DEBUG LOGGING END
+
+        if (footstepSounds.Length > 0 && audioSource != null)
+        {
+            int randIndex = UnityEngine.Random.Range(0, footstepSounds.Length);
+            audioSource.pitch = UnityEngine.Random.Range(0.8f, 1.2f);
+            audioSource.PlayOneShot(footstepSounds[randIndex]);
+        }
     }
 
     public virtual void Process(RaycastHit hit)

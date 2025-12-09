@@ -163,7 +163,7 @@ public class GameManager : MonoBehaviour
                 toSpawn = HeavyEnemy;
             }
         }
-
+        spawnPosition.y = -3.0f;
         GameObject spawnedEnemy = Instantiate(toSpawn, spawnPosition, Quaternion.identity);
         activeEnemies.Add(spawnedEnemy);
     }

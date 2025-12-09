@@ -1395,7 +1395,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26fccdd72d7191741b1e804a0a7632bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageModifer: 0
   target: {fileID: 0}
+  player: {fileID: 0}
   effectsManager: {fileID: 0}
   hitEffect: {fileID: 0}
   effectDuration: 0.1
@@ -1404,6 +1406,12 @@ MonoBehaviour:
   textDisplay: {fileID: 5953939069121407957}
   giveXP: 1
   dead: 0
+  riseSpeed: 2
+  dirtParticlePrefab: {fileID: 1839069868831513199, guid: 92353ac5e78ec5e4c92fd47a24fcf948, type: 3}
+  footstepSounds:
+  - {fileID: 8300000, guid: 4b31a885a9873574aad75cea757c90dc, type: 3}
+  - {fileID: 8300000, guid: 178a1c350cc58084a8d989c0db23fb72, type: 3}
+  stepRate: 3
 --- !u!136 &5178219454732740522
 CapsuleCollider:
   m_ObjectHideFlags: 0
