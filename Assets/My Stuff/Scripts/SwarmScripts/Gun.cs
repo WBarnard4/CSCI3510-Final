@@ -7,6 +7,9 @@ public class ZombieGun : MonoBehaviour
     //TODO:
     //add sound, and slight recoil to add some oomph when firing
     public float range = 100f;
+    
+    //firerate modifier edited by upgrade info
+    public float firerate = 0.75f;
 
     public ParticleSystem muzzleFlash;
     private Camera fpsCamera;
@@ -57,7 +60,7 @@ public class ZombieGun : MonoBehaviour
                     }
                 }
             }
-            nextTimeToFire = Time.time + 0.1f;
+            nextTimeToFire = Time.time + firerate;
         }
     }
 }

@@ -4,22 +4,28 @@ using UnityEngine;
 public class PlayerScript : MonoBehaviour
 {
     //[SerializeField] //commented for now, need public access to health and exp 
-    public float health = 100.0f;
+    public float maxHealth = 100.0f;
+    public float maxSpeed = 10;
+    public float damageModifer = 0;
     //[SerializeField]
     public float experience = 0.0f;
     public PlayerHudScript hud;
     private bool isAlive = true;
-
+    public float LvlThreshold = 50.0f;
+    public LevelUpMenu menu;
+    
     [HideInInspector]
-    public float LvlThreshold = 250.0f;
     public int playerLevel = 0;
 
     public DamageFlashEffect damageFlash; // Reference to the DamageFlashEffect script
 
+    [HideInInspector]
+    public float health;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        health = maxHealth;
     }
 
     // Update is called once per frame
@@ -66,9 +72,9 @@ public class PlayerScript : MonoBehaviour
         if (!isAlive) return;
 
         health += amount;
-        if (health > 100.0f)
+        if (health > maxHealth)
         {
-            health = 100.0f;
+            health = maxHealth;
         }
         Debug.Log("Healed " + amount + " health. Current health: " + health);
         hud.UpdateHud();
@@ -84,6 +90,7 @@ public class PlayerScript : MonoBehaviour
         experience = 0;
         LvlThreshold += 200;
         playerLevel += 1;
+        menu.showLevelUpMenu();
     }
 
     

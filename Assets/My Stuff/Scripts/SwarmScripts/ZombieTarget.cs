@@ -1,12 +1,14 @@
 using System;
 using TMPro;
-using UnityEditor.Callbacks;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class ZombieTarget : MonoBehaviour
 {
+    //damage modifier edited by upgrade info;
+    public float damageModifer = 0;
     public GameObject target;
+    public PlayerScript player;
 
     public GameObject effectsManager;
     public GameObject hitEffect;
@@ -35,6 +37,8 @@ public class ZombieTarget : MonoBehaviour
     {
         textDisplay.text = "";
         EXPAmount = enemyController.EXPAmount;
+        player = GameObject.FindWithTag("Player").GetComponent<PlayerScript>();
+        textDisplay.color = Color.red;
     }
 
     private void Update()
@@ -62,6 +66,7 @@ public class ZombieTarget : MonoBehaviour
                 Destroy(gameObject);
             }
         }
+        
     }
 
     public virtual void Process(RaycastHit hit)
@@ -72,7 +77,7 @@ public class ZombieTarget : MonoBehaviour
         {   
             float damage;
             float dropoff = 0.5f; //lower means more damage up close, less at range
-            damage = (float)Math.Floor(500.0f * dropoff/(hit.distance + (50.0f * dropoff - 5.0f)));
+            damage = (float)Math.Floor((500.0f + player.damageModifer) * dropoff/(hit.distance + (50.0f * dropoff - 5.0f)));
             //damage = 500; //temp for testing
             enemyController.health -= damage;
             textDisplay.text = ((int)damage).ToString();

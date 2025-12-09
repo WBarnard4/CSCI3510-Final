@@ -99,26 +99,69 @@ public class GameManager : MonoBehaviour
             }
             else
             {
-                
                 toSpawn = HeavyEnemy;
             }
             
         }
         else if(playerLevel < 6)
         {
-            
+            if(spinTheWheel < 0.5f)
+            {
+                toSpawn = WeakEnemy;
+            }
+            else if(spinTheWheel < 0.85f)
+            {
+                toSpawn = BasicEnemy;
+            }
+            else
+            {
+                toSpawn = HeavyEnemy;
+            }
         }
         else if(playerLevel < 9)
         {
-            
+            if(spinTheWheel < 0.35f)
+            {
+                toSpawn = WeakEnemy;
+            }
+            else if(spinTheWheel < 0.75f)
+            {
+                toSpawn = BasicEnemy;
+            }
+            else
+            {
+                toSpawn = HeavyEnemy;
+            }
         }
         else if(playerLevel < 12)
         {
-            
+            if(spinTheWheel < 0.20f)
+            {
+                toSpawn = WeakEnemy;
+            }
+            else if(spinTheWheel < 0.70f)
+            {
+                toSpawn = BasicEnemy;
+            }
+            else
+            {
+                toSpawn = HeavyEnemy;
+            }
         }
         else if(playerLevel < 16)
         {
-            
+            if(spinTheWheel < 0.1f)
+            {
+                toSpawn = WeakEnemy;
+            }
+            else if(spinTheWheel < 0.65f)
+            {
+                toSpawn = BasicEnemy;
+            }
+            else
+            {
+                toSpawn = HeavyEnemy;
+            }
         }
 
         GameObject spawnedEnemy = Instantiate(toSpawn, spawnPosition, Quaternion.identity);
