@@ -32,7 +32,7 @@ public class UpgradeInfoScript :ScriptableObject
                 break;
 
             case UpgradeType.FireRate:
-                gun.firerate -= amount;
+                gun.roundsPerMinute += amount*1000;
                 break;
 
         }

@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,6 +9,7 @@ public class GameManager : MonoBehaviour
     public float minSpawnDist = 10f;
     public int maxSpawnCount = 50;
     public float spawnFrequency = 5f;
+    public float interSpawnDelay = 0.5f;
 
 
     private float timer = 0f;
@@ -44,7 +46,8 @@ public class GameManager : MonoBehaviour
         PlayerScript p = player.GetComponent<PlayerScript>();
 
         //determine the enemy amount to spawn
-        int enemyCount = Math.Clamp(p.playerLevel*2, 5, maxSpawnCount);
+        //int enemyCount = Math.Clamp(p.playerLevel*2, 5, maxSpawnCount);
+        int enemyCount = 50;
         Transform PlayerPos = PlayerManager.Instance.player.transform;
 
         //figure the amount we can spawn given the current amount of enemies active 
@@ -58,14 +61,22 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        for(int i = 0; i < enemyCount; i++)
+        StartCoroutine(SpawnWaveCoroutine(amtToSpawn, p.playerLevel, PlayerPos.position));
+
+    }
+
+    private IEnumerator SpawnWaveCoroutine(int count, int playerLevel, Vector3 playerPos)
+    {
+        for (int i = 0; i < count; i++)
         {
-            //spawn all enemies
-            Vector3 spawnPosition = GetSpawnPosition(PlayerPos.position);
-            spawnEnemy(spawnPosition, p.playerLevel);
+            Vector3 spawnPosition = GetSpawnPosition(playerPos);
+            spawnEnemy(spawnPosition, playerLevel);
 
+            if (i < count - 1)
+            {
+                yield return new WaitForSeconds(interSpawnDelay);
+            }
         }
-
     }
 
 

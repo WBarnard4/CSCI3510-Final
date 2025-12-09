@@ -45,6 +45,7 @@ public class ZombieTarget : MonoBehaviour
     private float startWaitTimer = 0.0f;
     private bool isWaitingToWalk = false;
 
+
     private void Awake()
     {
         //effectScript = effectsManager.GetComponent<Effect>();
@@ -97,9 +98,8 @@ public class ZombieTarget : MonoBehaviour
                     Destroy(activeDirtParticles); 
                 }
 
-                startWaitTimer = UnityEngine.Random.Range(minStartDelay, maxStartDelay);
-                Debug.Log("Start Wait Timer set to: " + startWaitTimer);
-                isWaitingToWalk = true;
+                if (navAgent != null) navAgent.enabled = true;
+                if (enemyController != null) enemyController.enabled = true;
             }
             return;
         }
@@ -178,7 +178,8 @@ void PlayFootstep()
         {   
             float damage;
             float dropoff = 0.5f; //lower means more damage up close, less at range
-            damage = (float)Math.Floor((500.0f + player.damageModifer) * dropoff/(hit.distance + (50.0f * dropoff - 5.0f)));
+            float randomFactor = UnityEngine.Random.Range(0.8f, 1.2f);
+            damage = (float)Math.Floor((500.0f + player.damageModifer) * dropoff/(hit.distance + (50.0f * dropoff - 5.0f))) * randomFactor;
             //damage = 500; //temp for testing
             enemyController.health -= damage;
             textDisplay.text = ((int)damage).ToString();

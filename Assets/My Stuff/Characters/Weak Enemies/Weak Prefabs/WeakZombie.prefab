@@ -847,9 +847,11 @@ MonoBehaviour:
   riseSpeed: 2
   dirtParticlePrefab: {fileID: 1839069868831513199, guid: 92353ac5e78ec5e4c92fd47a24fcf948, type: 3}
   footstepSounds:
-  - {fileID: 8300000, guid: 26fc0865108da9b4187b14f473b85c91, type: 3}
-  - {fileID: 8300000, guid: 6bd9ec2a22bb9264ca391b6632439730, type: 3}
+  - {fileID: 8300000, guid: 4b31a885a9873574aad75cea757c90dc, type: 3}
+  - {fileID: 8300000, guid: 178a1c350cc58084a8d989c0db23fb72, type: 3}
   stepRate: 2
+  minStartDelay: 0.5
+  maxStartDelay: 2
 --- !u!136 &1178143778978254226
 CapsuleCollider:
   m_ObjectHideFlags: 0
