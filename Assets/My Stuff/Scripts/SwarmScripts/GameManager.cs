@@ -7,8 +7,8 @@ public class GameManager : MonoBehaviour
 {
     public float maxSpawnDist = 15f;
     public float minSpawnDist = 10f;
-    public int maxSpawnCount = 50;
-    public float spawnFrequency = 5f;
+    public int maxSpawnCount = 5;
+    public float spawnFrequency = 10f;
     public float interSpawnDelay = 0.5f;
 
 
@@ -46,8 +46,8 @@ public class GameManager : MonoBehaviour
         PlayerScript p = player.GetComponent<PlayerScript>();
 
         //determine the enemy amount to spawn
-        //int enemyCount = Math.Clamp(p.playerLevel*2, 5, maxSpawnCount);
-        int enemyCount = 50;
+        int minClamp = Math.Min(10, maxSpawnCount);
+        int enemyCount = Math.Clamp(p.playerLevel*3, minClamp, maxSpawnCount);
         Transform PlayerPos = PlayerManager.Instance.player.transform;
 
         //figure the amount we can spawn given the current amount of enemies active 
