@@ -257,6 +257,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 26156912}
   m_CullTransparentMesh: 1
+--- !u!1 &357455271
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 357455272}
+  m_Layer: 0
+  m_Name: Muzzle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &357455272
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 357455271}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.005, y: 0.091, z: 0.3962}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1352475586}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &449320694
 GameObject:
   m_ObjectHideFlags: 0
@@ -738,6 +769,14 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 1.375
       objectReference: {fileID: 0}
+    - target: {fileID: 2056195015564173294, guid: 8af7e5a7f3502ea4c860219be2beac3d, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2056449940537543782, guid: 8af7e5a7f3502ea4c860219be2beac3d, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3640089596090854491, guid: 8af7e5a7f3502ea4c860219be2beac3d, type: 3}
       propertyPath: m_fontSize
       value: 25
@@ -802,6 +841,26 @@ PrefabInstance:
       propertyPath: firerate
       value: 0.75
       objectReference: {fileID: 0}
+    - target: {fileID: 7371916906378356061, guid: 8af7e5a7f3502ea4c860219be2beac3d, type: 3}
+      propertyPath: muzzlePoint
+      value: 
+      objectReference: {fileID: 357455272}
+    - target: {fileID: 7371916906378356061, guid: 8af7e5a7f3502ea4c860219be2beac3d, type: 3}
+      propertyPath: tracerPrefab
+      value: 
+      objectReference: {fileID: -904939858749856708, guid: 5c03d75e91ed1a2458936a7cca3079d3, type: 3}
+    - target: {fileID: 7371916906378356061, guid: 8af7e5a7f3502ea4c860219be2beac3d, type: 3}
+      propertyPath: aimPosition.x
+      value: 0.003
+      objectReference: {fileID: 0}
+    - target: {fileID: 7371916906378356061, guid: 8af7e5a7f3502ea4c860219be2beac3d, type: 3}
+      propertyPath: aimPosition.y
+      value: -0.18
+      objectReference: {fileID: 0}
+    - target: {fileID: 7371916906378356061, guid: 8af7e5a7f3502ea4c860219be2beac3d, type: 3}
+      propertyPath: aimPosition.z
+      value: 0.54
+      objectReference: {fileID: 0}
     - target: {fileID: 8906933225233900765, guid: 8af7e5a7f3502ea4c860219be2beac3d, type: 3}
       propertyPath: m_LocalPosition.y
       value: 1.375
@@ -809,6 +868,9 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 2074929484854364446, guid: 8af7e5a7f3502ea4c860219be2beac3d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 357455272}
     - targetCorrespondingSourceObject: {fileID: 497119010695344448, guid: 8af7e5a7f3502ea4c860219be2beac3d, type: 3}
       insertIndex: -1
       addedObject: {fileID: 878116675}
@@ -828,6 +890,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d322f0f1895dc542942aba1bd327cc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &1352475586 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2074929484854364446, guid: 8af7e5a7f3502ea4c860219be2beac3d, type: 3}
+  m_PrefabInstance: {fileID: 1188020744}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1689556533
 GameObject:
   m_ObjectHideFlags: 0
@@ -940,6 +1007,7 @@ MonoBehaviour:
   minSpawnDist: 10
   maxSpawnCount: 5
   spawnFrequency: 10
+  interSpawnDelay: 0.5
   WeakEnemy: {fileID: 2895595193390764846, guid: c5a8643374083ea4f9437f41eabee919, type: 3}
   BasicEnemy: {fileID: 5159995985045090627, guid: 4d68c6e053c779642a2108749ffb8273, type: 3}
   HeavyEnemy: {fileID: 3506111974636064216, guid: 4b4a266f4ced30d458154480ae49e577, type: 3}
