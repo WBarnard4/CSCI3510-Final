@@ -118,9 +118,27 @@ public class ZombieTarget : MonoBehaviour
                 {
                     Destroy(activeDirtParticles); 
                 }
+                if (navAgent != null) 
+                {
+                    navAgent.enabled = true;
 
-                if (navAgent != null) navAgent.enabled = true;
-                if (enemyController != null) enemyController.enabled = true;
+                    NavMeshHit hit;
+                    if (NavMesh.SamplePosition(transform.position, out hit, 5.0f, UnityEngine.AI.NavMesh.AllAreas))
+                    {
+                        navAgent.Warp(hit.position);
+
+                        if (enemyController != null) 
+                        {
+                            enemyController.enabled = true;
+                        }
+                    }
+                    else
+                    {
+                        Debug.LogWarning($"Failed to place {gameObject.name} on NavMesh. Disabling agent.");
+                        navAgent.enabled = false;
+                        Destroy(gameObject);
+                    }
+                }
             }
             return;
         }
