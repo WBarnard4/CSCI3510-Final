@@ -17,8 +17,17 @@ public class PlayerScript : MonoBehaviour
     public GameObject PlayerHud;
     public AudioClip hurtNoise;
     
+    //info for UI
     [HideInInspector]
     public int playerLevel = 0;
+    [HideInInspector]
+    public int WeakKilled = 0;
+    [HideInInspector]
+    public int BasicKilled = 0;
+    [HideInInspector]
+    public int HeavyKilled = 0;
+
+
 
     public DamageFlashEffect damageFlash; // Reference to the DamageFlashEffect script
 

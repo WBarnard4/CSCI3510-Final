@@ -289,8 +289,8 @@ MonoBehaviour:
   HeavyScore: {fileID: 1704872046}
   PlayerLevel: {fileID: 470306230}
   FinalScoreAmt: {fileID: 1067621431}
-  P: {fileID: 0}
-  Z: {fileID: 0}
+  HighScoreAlertText: {fileID: 1539970263}
+  P: {fileID: 667881969}
 --- !u!1 &334388265
 GameObject:
   m_ObjectHideFlags: 0
@@ -811,6 +811,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 55374714122508428, guid: f437ee2297fdee0408e9fb9ca6fee23b, type: 3}
   m_PrefabInstance: {fileID: 4944965824186343155}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &667881969 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3581850663407485223, guid: f437ee2297fdee0408e9fb9ca6fee23b, type: 3}
+  m_PrefabInstance: {fileID: 4944965824186343155}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 667881966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c098e382d36a33449007a8b88f3eafb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &813261063 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8153277681093898745, guid: f437ee2297fdee0408e9fb9ca6fee23b, type: 3}

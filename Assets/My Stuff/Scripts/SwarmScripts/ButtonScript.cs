@@ -18,4 +18,13 @@ public class ButtonScript : MonoBehaviour
         SceneManager.LoadScene("SwarmMainMenu");
         Time.timeScale = 1f;
     }
+
+    public void handleResetButton()
+    {
+        PlayerPrefs.SetInt("WeakKilled",0);
+        PlayerPrefs.SetInt("BasicKilled",0);
+        PlayerPrefs.SetInt("HeavyKilled",0);
+        PlayerPrefs.SetInt("HighestLevel",0);
+        PlayerPrefs.SetInt("HighScore",0);
+    }
 }

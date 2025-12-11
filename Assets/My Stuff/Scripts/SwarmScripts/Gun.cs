@@ -54,7 +54,7 @@ public class ZombieGun : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(roundsPerMinute);
+        
         bool ready = Time.time >= nextTimeToFire;
         if (ready && Input.GetButton("Fire1"))
         {
