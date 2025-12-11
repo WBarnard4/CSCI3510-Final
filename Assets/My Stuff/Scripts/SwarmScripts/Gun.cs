@@ -1,4 +1,5 @@
 //using UnityEditor.SearchService;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Pool; // Required for Object Pooling
@@ -11,13 +12,15 @@ public class ZombieGun : MonoBehaviour
     
     //firerate modifier edited by upgrade info
     public float roundsPerMinute = 300f;
-    private float fireDelay;
+    [HideInInspector]
+    public float fireDelay;
     public float spread = 0.05f;
 
     [Header("Visual Settings")]
     public ParticleSystem muzzleFlash;
     public BulletTracerBehavior tracerPrefab;
     public Transform muzzlePoint;
+    public AudioClip shootNoise;
 
     private Camera fpsCamera;
     private float nextTimeToFire;
@@ -51,10 +54,12 @@ public class ZombieGun : MonoBehaviour
 
     void Update()
     {
+        Debug.Log(roundsPerMinute);
         bool ready = Time.time >= nextTimeToFire;
         if (ready && Input.GetButton("Fire1"))
         {
             Shoot();
+            
         }
 
         if (Input.GetMouseButton(1)) 
@@ -69,12 +74,15 @@ public class ZombieGun : MonoBehaviour
 
     void Shoot()
     {
+        AudioSource AS = GetComponent<AudioSource>();
         // Update cooldown immediately
         nextTimeToFire = Time.time + fireDelay;
+        AS.PlayOneShot(shootNoise);
 
         if (muzzleFlash != null)
         {
             muzzleFlash.Play();
+            
         }
 
         float adsSpread = spread;

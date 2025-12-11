@@ -1484,7 +1484,7 @@ GameObject:
   - component: {fileID: 2864726380516199214}
   m_Layer: 0
   m_Name: BasicZombie
-  m_TagString: Untagged
+  m_TagString: BasicZombie
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1639,7 +1639,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: -1372625422
   m_Radius: 0.5
-  m_Speed: 1
+  m_Speed: 3
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -1698,6 +1698,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 26fc0865108da9b4187b14f473b85c91, type: 3}
   - {fileID: 8300000, guid: 6bd9ec2a22bb9264ca391b6632439730, type: 3}
   stepRate: 2
+  minStartDelay: 0.5
+  maxStartDelay: 2
 --- !u!136 &2864726380516199214
 CapsuleCollider:
   m_ObjectHideFlags: 0

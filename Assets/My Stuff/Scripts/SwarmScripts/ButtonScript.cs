@@ -16,5 +16,6 @@ public class ButtonScript : MonoBehaviour
     public void handleBackButton()
     {
         SceneManager.LoadScene("SwarmMainMenu");
+        Time.timeScale = 1f;
     }
 }

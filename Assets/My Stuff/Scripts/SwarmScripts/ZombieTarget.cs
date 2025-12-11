@@ -20,6 +20,15 @@ public class ZombieTarget : MonoBehaviour
     [HideInInspector]
     public bool giveXP = true;
 
+    //Zombie death counting for kill tracking
+    [HideInInspector]
+    public int WeakKilled = 0;
+    [HideInInspector]
+    public int BasicKilled = 0;
+    [HideInInspector]
+    public int HeavyKilled = 0;
+
+
     private EnemyController enemyController;
 
     protected Effect effectScript;
@@ -181,6 +190,18 @@ public class ZombieTarget : MonoBehaviour
                 transform.position = new Vector3(transform.position.x, transform.position.y - Time.deltaTime, transform.position.z);
             } else
             {
+                if(gameObject.tag == "WeakZombie")
+                {
+                    WeakKilled += 1;
+                }
+                else if(gameObject.tag == "BasicZombie")
+                {
+                    BasicKilled += 1;
+                }
+                else if(gameObject.tag == "HeavyZombie")
+                {
+                    HeavyKilled += 1;
+                }
                 Destroy(gameObject);
             }
         }

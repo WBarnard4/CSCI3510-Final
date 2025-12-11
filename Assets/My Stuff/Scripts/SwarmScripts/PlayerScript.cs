@@ -12,7 +12,10 @@ public class PlayerScript : MonoBehaviour
     public PlayerHudScript hud;
     private bool isAlive = true;
     public float LvlThreshold = 50.0f;
-    public LevelUpMenu menu;
+    public LevelUpMenu LevelUpMenu;
+    public GameOverMenu GameOverMenu;
+    public GameObject PlayerHud;
+    public AudioClip hurtNoise;
     
     [HideInInspector]
     public int playerLevel = 0;
@@ -38,6 +41,7 @@ public class PlayerScript : MonoBehaviour
 
     public void takeDamage(float damage)
     {
+        AudioSource AS = GetComponent<AudioSource>();
         if (!isAlive) return;
 
         health -= damage;
@@ -46,11 +50,16 @@ public class PlayerScript : MonoBehaviour
             health = 0;
             isAlive = false;
             Debug.Log("Player has died.");
+            PlayerHud.SetActive(false);
+            GameOverMenu.showGameOverMenu();
+
         }
         Debug.Log("Player took " + damage + " damage. Current health: " + health);
         if (damageFlash != null)
         {
             damageFlash.TriggerFlash();
+            AS.PlayOneShot(hurtNoise);
+
         }
         hud.UpdateHud();
     }
@@ -92,7 +101,7 @@ public class PlayerScript : MonoBehaviour
         experience = 0;
         LvlThreshold += 200;
         playerLevel += 1;
-        menu.showLevelUpMenu();
+        LevelUpMenu.showLevelUpMenu();
     }
 
     

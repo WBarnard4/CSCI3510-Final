@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -23,20 +24,29 @@ public class GameManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
-        
+
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        timer += Time.deltaTime;
-        if(timer >= spawnFrequency)
+        if (SceneManager.GetActiveScene().name != "SwarmGame")
         {
-            spawnWave();
-            Debug.Log("Wave Spawned");
-            timer = 0f;
+            return;
         }
+        else
+        {
+            timer += Time.deltaTime;
+            if (timer >= spawnFrequency)
+            {
+                spawnWave();
+                Debug.Log("Wave Spawned");
+                timer = 0f;
+            }
+        }
+
+
     }
 
     void spawnWave()
@@ -46,14 +56,14 @@ public class GameManager : MonoBehaviour
         PlayerScript p = player.GetComponent<PlayerScript>();
 
         //determine the enemy amount to spawn
-        int enemyCount = Math.Clamp(p.playerLevel*2, 5, maxSpawnCount);
+        int enemyCount = Math.Clamp(p.playerLevel * 2, 5, maxSpawnCount);
         //int enemyCount = 50;
         Transform PlayerPos = PlayerManager.Instance.player.transform;
 
         //figure the amount we can spawn given the current amount of enemies active 
-        int amtToSpawn = Math.Min(enemyCount, maxSpawnCount-activeEnemies.Count);
+        int amtToSpawn = Math.Min(enemyCount, maxSpawnCount - activeEnemies.Count);
 
-        if(amtToSpawn <= 0)
+        if (amtToSpawn <= 0)
         {
             //if we are full on enemies
             Debug.Log("Couldnt spawn enemies, max enemy count reached.");
@@ -84,7 +94,7 @@ public class GameManager : MonoBehaviour
     {
         //This function returns the spawn positions for each enemy being spawned
         Vector2 randomDirection = UnityEngine.Random.insideUnitCircle.normalized; //Direction to spawn
-        float spawnDist = UnityEngine.Random.Range(minSpawnDist,maxSpawnDist);
+        float spawnDist = UnityEngine.Random.Range(minSpawnDist, maxSpawnDist);
 
         //given the player position, our spawn position will be a vector a random direction in the x and z axis 
         //with a distance multiplied by spawn distance
@@ -98,13 +108,13 @@ public class GameManager : MonoBehaviour
     {
         GameObject toSpawn = null;
         float spinTheWheel = UnityEngine.Random.value;
-        if(playerLevel < 3)
+        if (playerLevel < 3)
         {
-            if(spinTheWheel < 0.75f)
+            if (spinTheWheel < 0.75f)
             {
                 toSpawn = WeakEnemy;
             }
-            else if(spinTheWheel < 0.9f)
+            else if (spinTheWheel < 0.9f)
             {
                 toSpawn = BasicEnemy;
             }
@@ -112,30 +122,15 @@ public class GameManager : MonoBehaviour
             {
                 toSpawn = HeavyEnemy;
             }
-            
+
         }
-        else if(playerLevel < 6)
+        else if (playerLevel < 6)
         {
-            if(spinTheWheel < 0.5f)
+            if (spinTheWheel < 0.5f)
             {
                 toSpawn = WeakEnemy;
             }
-            else if(spinTheWheel < 0.85f)
-            {
-                toSpawn = BasicEnemy;
-            }
-            else
-            {
-                toSpawn = HeavyEnemy;
-            }
-        }
-        else if(playerLevel < 9)
-        {
-            if(spinTheWheel < 0.35f)
-            {
-                toSpawn = WeakEnemy;
-            }
-            else if(spinTheWheel < 0.75f)
+            else if (spinTheWheel < 0.85f)
             {
                 toSpawn = BasicEnemy;
             }
@@ -144,13 +139,13 @@ public class GameManager : MonoBehaviour
                 toSpawn = HeavyEnemy;
             }
         }
-        else if(playerLevel < 12)
+        else if (playerLevel < 9)
         {
-            if(spinTheWheel < 0.20f)
+            if (spinTheWheel < 0.35f)
             {
                 toSpawn = WeakEnemy;
             }
-            else if(spinTheWheel < 0.70f)
+            else if (spinTheWheel < 0.75f)
             {
                 toSpawn = BasicEnemy;
             }
@@ -159,13 +154,28 @@ public class GameManager : MonoBehaviour
                 toSpawn = HeavyEnemy;
             }
         }
-        else if(playerLevel < 16)
+        else if (playerLevel < 12)
         {
-            if(spinTheWheel < 0.1f)
+            if (spinTheWheel < 0.20f)
             {
                 toSpawn = WeakEnemy;
             }
-            else if(spinTheWheel < 0.65f)
+            else if (spinTheWheel < 0.70f)
+            {
+                toSpawn = BasicEnemy;
+            }
+            else
+            {
+                toSpawn = HeavyEnemy;
+            }
+        }
+        else if (playerLevel < 16)
+        {
+            if (spinTheWheel < 0.1f)
+            {
+                toSpawn = WeakEnemy;
+            }
+            else if (spinTheWheel < 0.65f)
             {
                 toSpawn = BasicEnemy;
             }
