@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: d9dca9ae1786c394f9e79c637aa9a7bf, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -1397,7 +1397,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 365780320402415298, guid: 2fb5060043a81e84a8ec4c3644847659, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6404528906630507269, guid: 2fb5060043a81e84a8ec4c3644847659, type: 3}
       propertyPath: m_LocalScale.x
@@ -2265,9 +2265,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxSpawnDist: 15
   minSpawnDist: 10
-  maxSpawnCount: 5
-  spawnFrequency: 10
+  maxSpawnCount: 50
+  spawnFrequency: 15
   interSpawnDelay: 0.5
+  skyBoxSpeed: 0.25
   WeakEnemy: {fileID: 2895595193390764846, guid: c5a8643374083ea4f9437f41eabee919, type: 3}
   BasicEnemy: {fileID: 5159995985045090627, guid: 4d68c6e053c779642a2108749ffb8273, type: 3}
   HeavyEnemy: {fileID: 3506111974636064216, guid: 4b4a266f4ced30d458154480ae49e577, type: 3}
@@ -2416,6 +2417,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 55374714122508427, guid: f437ee2297fdee0408e9fb9ca6fee23b, type: 3}
+      propertyPath: MoveSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 55374714122508427, guid: f437ee2297fdee0408e9fb9ca6fee23b, type: 3}
+      propertyPath: SprintSpeed
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 443740664737502047, guid: f437ee2297fdee0408e9fb9ca6fee23b, type: 3}
       propertyPath: m_Name
       value: Crosshair/Canvas
@@ -2429,6 +2438,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3581850663407485223, guid: f437ee2297fdee0408e9fb9ca6fee23b, type: 3}
+      propertyPath: GM
+      value: 
+      objectReference: {fileID: 1839321428}
+    - target: {fileID: 3581850663407485223, guid: f437ee2297fdee0408e9fb9ca6fee23b, type: 3}
       propertyPath: PlayerHud
       value: 
       objectReference: {fileID: 1580723495}
@@ -2440,6 +2453,14 @@ PrefabInstance:
       propertyPath: GameOverMenu
       value: 
       objectReference: {fileID: 283657004}
+    - target: {fileID: 3581850663407485223, guid: f437ee2297fdee0408e9fb9ca6fee23b, type: 3}
+      propertyPath: levelUpNoise
+      value: 
+      objectReference: {fileID: 8300000, guid: 464a80fab663a17479eeed2e32f47441, type: 3}
+    - target: {fileID: 3581850663407485223, guid: f437ee2297fdee0408e9fb9ca6fee23b, type: 3}
+      propertyPath: gameOverSound
+      value: 
+      objectReference: {fileID: 8300000, guid: b9a305ece3ccf3d42a9b8568c0cc2bd7, type: 3}
     - target: {fileID: 3819283421115839200, guid: f437ee2297fdee0408e9fb9ca6fee23b, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -2495,6 +2516,22 @@ PrefabInstance:
     - target: {fileID: 6661311931630092260, guid: f437ee2297fdee0408e9fb9ca6fee23b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6885863087482575684, guid: f437ee2297fdee0408e9fb9ca6fee23b, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6885863087482575684, guid: f437ee2297fdee0408e9fb9ca6fee23b, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6885863087482575684, guid: f437ee2297fdee0408e9fb9ca6fee23b, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6885863087482575684, guid: f437ee2297fdee0408e9fb9ca6fee23b, type: 3}
+      propertyPath: m_Material
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 6903763255749971235, guid: f437ee2297fdee0408e9fb9ca6fee23b, type: 3}
       propertyPath: m_IsActive

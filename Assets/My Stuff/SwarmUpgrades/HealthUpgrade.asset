@@ -15,4 +15,4 @@ MonoBehaviour:
   UpgradeName: Health
   Icon: {fileID: 21300000, guid: a7c9dae9fdb6acc49849accd33cf3582, type: 3}
   type: 0
-  amount: 10
+  amount: 25

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Cinemachine;
 using StarterAssets;
 using UnityEngine;
 
@@ -25,6 +26,7 @@ public class LevelUpMenu : MonoBehaviour
     public void showLevelUpMenu()
     {
         //freeze time, and make the cursor usable for interaction
+        Camera.main.GetComponent<CinemachineBrain>().enabled = false;
         Time.timeScale = 0f;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
@@ -82,6 +84,7 @@ public class LevelUpMenu : MonoBehaviour
         Time.timeScale = 1f;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+        Camera.main.GetComponent<CinemachineBrain>().enabled = true;
     }
 
 

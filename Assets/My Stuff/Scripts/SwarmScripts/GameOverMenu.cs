@@ -1,4 +1,6 @@
 
+using System.Collections;
+using Cinemachine;
 using TMPro;
 using UnityEngine;
 
@@ -17,6 +19,8 @@ public class GameOverMenu : MonoBehaviour
     public PlayerScript P;
 
 
+
+
     private int finalScore;
 
 
@@ -31,6 +35,8 @@ public class GameOverMenu : MonoBehaviour
 
     public void showGameOverMenu()
     {
+        
+        Camera.main.GetComponent<CinemachineBrain>().enabled = false;
         //Make the text reflect ingame scores
         WeakScore.text = WeakPrefix + P.WeakKilled;
         BasicScore.text = BasicPrefix + P.BasicKilled;
@@ -75,6 +81,8 @@ public class GameOverMenu : MonoBehaviour
         PlayerPrefs.Save();
         
     }
+
+    
 
     
 

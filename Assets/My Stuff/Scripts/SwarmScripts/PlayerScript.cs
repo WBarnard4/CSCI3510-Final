@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using System.ComponentModel;
 using UnityEngine;
 
@@ -16,6 +18,11 @@ public class PlayerScript : MonoBehaviour
     public GameOverMenu GameOverMenu;
     public GameObject PlayerHud;
     public AudioClip hurtNoise;
+    public AudioClip levelUpNoise;
+    public AudioClip gameOverSound;
+    public GameManager GM;
+
+    private AudioSource AS;
     
     //info for UI
     [HideInInspector]
@@ -42,6 +49,11 @@ public class PlayerScript : MonoBehaviour
         Cursor.visible = false;
     }
 
+    void Awake()
+    {
+        AS = GetComponent<AudioSource>();
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -50,7 +62,7 @@ public class PlayerScript : MonoBehaviour
 
     public void takeDamage(float damage)
     {
-        AudioSource AS = GetComponent<AudioSource>();
+        
         if (!isAlive) return;
 
         health -= damage;
@@ -60,6 +72,7 @@ public class PlayerScript : MonoBehaviour
             isAlive = false;
             Debug.Log("Player has died.");
             PlayerHud.SetActive(false);
+            AS.PlayOneShot(gameOverSound, 1f);
             GameOverMenu.showGameOverMenu();
 
         }
@@ -82,7 +95,11 @@ public class PlayerScript : MonoBehaviour
         Debug.Log("Gained " + exp + " experience. Total experience: " + experience);
         if(experience >= LvlThreshold)
         {
+            //If we've reached the threshold, level up, and heal for 10% of max health
+            AS.PlayOneShot(levelUpNoise, 0.25f);
+            heal(maxHealth * 0.1f); 
             LevelUp();
+            
         }
         hud.UpdateHud();
     }
@@ -107,11 +124,16 @@ public class PlayerScript : MonoBehaviour
 
     public void LevelUp()
     {
+        //reset experience, increase level, increase threshold, reduce wave spawn time, and show level up menu
         experience = 0;
         LvlThreshold += 200;
         playerLevel += 1;
+        GM.spawnFrequency = Math.Clamp(GM.spawnFrequency - 1f, 2f, 10f);
         LevelUpMenu.showLevelUpMenu();
+        hud.UpdateHud();
     }
+
+    
 
     
 }

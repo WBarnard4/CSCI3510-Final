@@ -6,11 +6,12 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public float maxSpawnDist = 15f;
-    public float minSpawnDist = 10f;
-    public int maxSpawnCount = 5;
+    public float maxSpawnDist = 15f; //maximum spawn distance from the player
+    public float minSpawnDist = 10f; //minimum spawn distance from the player
+    public int maxSpawnCount = 50;   //maximum number of enemies allowed to be active at once
     public float spawnFrequency = 10f;
     public float interSpawnDelay = 0.5f;
+    public float skyBoxSpeed = 0.5f;
 
 
     private float timer = 0f;
@@ -37,6 +38,9 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+            Debug.Log(activeEnemies.Count);
+            //Skybox rotation code found from @Mikes-Code on youtube
+            RenderSettings.skybox.SetFloat("_Rotation", Time.time * skyBoxSpeed);
             timer += Time.deltaTime;
             if (timer >= spawnFrequency)
             {
@@ -56,7 +60,7 @@ public class GameManager : MonoBehaviour
         PlayerScript p = player.GetComponent<PlayerScript>();
 
         //determine the enemy amount to spawn
-        int enemyCount = Math.Clamp(p.playerLevel * 2, 5, maxSpawnCount);
+        int enemyCount = Math.Clamp(p.playerLevel * 2, 10, maxSpawnCount);
         //int enemyCount = 50;
         Transform PlayerPos = PlayerManager.Instance.player.transform;
 
