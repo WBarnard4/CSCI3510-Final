@@ -1316,6 +1316,7 @@ MonoBehaviour:
   stepRate: 0.7
   minStartDelay: 0.5
   maxStartDelay: 2
+  TombstonePrefab: {fileID: 6196873832947085292, guid: ba113e40ace619e4a8b1f80dea0de2da, type: 3}
 --- !u!136 &5178219454732740522
 CapsuleCollider:
   m_ObjectHideFlags: 0

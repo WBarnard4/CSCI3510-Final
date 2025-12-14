@@ -47,6 +47,7 @@ public class ZombieTarget : MonoBehaviour
     private bool isWaitingToWalk = false;
 
     private float deathYLevel;
+    public GameObject TombstonePrefab;
 
 
     private void Awake()
@@ -274,6 +275,7 @@ void PlayFootstep()
                 {
                     Debug.Log("No NavMeshAgent found on " + gameObject.name);
                 }
+                Instantiate(TombstonePrefab, new Vector3(transform.position.x, transform.position.y, transform.position.z), transform.rotation);
             }
         }
         //Destroy(target);
