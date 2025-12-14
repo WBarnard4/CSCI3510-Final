@@ -265,6 +265,12 @@ void PlayFootstep()
                 rb.isKinematic = true;
                 NavMeshAgent agent = GetComponent<NavMeshAgent>();
                 Animator animator = GetComponent<Animator>();
+                //allow shooting through the dead zombie
+                Collider collider = GetComponent<CapsuleCollider>();
+                if (collider != null)
+                {
+                    collider.enabled = false;
+                }
                 animator.enabled = false;
                 if (agent != null)
                 {
