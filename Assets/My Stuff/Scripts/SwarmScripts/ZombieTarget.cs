@@ -234,10 +234,27 @@ void PlayFootstep()
             damage = (float)Math.Floor((500.0f + player.damageModifer) * dropoff/(hit.distance + (50.0f * dropoff - 5.0f))) * randomFactor;
             //damage = 500; //temp for testing
             enemyController.health -= damage;
-            textDisplay.text = ((int)damage).ToString();
-            textDisplay.transform.LookAt(Camera.main.transform);
-            //flip the text to face the camera correctly
-            textDisplay.transform.Rotate(0, 180, 0);
+            bool fancyDamageEnabled = true;
+            if(!fancyDamageEnabled)
+            {
+                textDisplay.text = ((int)damage).ToString();
+                textDisplay.transform.LookAt(Camera.main.transform);
+                //flip the text to face the camera correctly
+                textDisplay.transform.Rotate(0, 180, 0);
+                //get hit location for text display
+                Vector3 hitLocation = hit.point + Vector3.up * 0.1f + (hit.normal * 0.1f);
+                textDisplay.transform.position = hitLocation;
+            }
+            else{
+                GameObject canvas = textDisplay.transform.parent.gameObject;
+                TMP_Text damageText = Instantiate(textDisplay, canvas.transform);
+                damageText.text = ((int)damage).ToString();
+                damageText.transform.LookAt(Camera.main.transform);
+                damageText.transform.Rotate(0, 180, 0);
+                damageText.transform.position = hit.point + Vector3.up * 0.1f + (damageText.transform.forward * -(0.7f + randomFactor * 0.1f));
+                damageText.fontSize = 14f + (damage * 0.1f);
+                Destroy(damageText.gameObject, 0.5f);
+            }
             if (enemyController.health <= 0 && !dead)
             {
                 Debug.Log("Zombie has died.");
